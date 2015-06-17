@@ -14,7 +14,7 @@ enum RelationshipDirection {
         DetachedCriteria<Relationship> composeWhere(CatalogueElement element, RelationshipType type, ClassificationFilter filter) {
             DetachedCriteria<Relationship> criteria = new DetachedCriteria<Relationship>(Relationship)
             criteria.join 'source'
-            criteria.eq('destination', element)
+            criteria.inList('destination', getSelfAndBases(element, type))
             if (type) {
                 criteria.eq('relationshipType', type)
             }
@@ -89,7 +89,7 @@ enum RelationshipDirection {
         DetachedCriteria<Relationship> composeWhere(CatalogueElement element, RelationshipType type, ClassificationFilter filter) {
             DetachedCriteria<Relationship> criteria = new DetachedCriteria<Relationship>(Relationship)
             criteria.join 'destination'
-            criteria.eq('source', element)
+            criteria.inList('source', getSelfAndBases(element, type))
             if (type) {
                 criteria.eq('relationshipType', type)
             }
@@ -167,8 +167,8 @@ enum RelationshipDirection {
             criteria.join 'source'
             criteria.join 'destination'
             criteria.or {
-                eq('source', element)
-                eq('destination', element)
+                inList('source', getSelfAndBases(element, type))
+                inList('destination', getSelfAndBases(element, type))
             }
             if (type) {
                 criteria.eq('relationshipType', type)
@@ -259,6 +259,20 @@ enum RelationshipDirection {
             default: return BOTH
         }
 
+    }
+
+    static Set<CatalogueElement> getSelfAndBases(CatalogueElement self, RelationshipType type, Set<CatalogueElement> accumulator = new LinkedHashSet<CatalogueElement>([self])) {
+        if (type == RelationshipType.baseType) {
+            return accumulator
+        }
+        for(CatalogueElement base in self.isBasedOn) {
+            if (accumulator.contains(base)) {
+                continue
+            }
+            accumulator << base
+            getSelfAndBases(base, type, accumulator)
+        }
+        accumulator
     }
 
 }

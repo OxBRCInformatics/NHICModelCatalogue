@@ -162,23 +162,17 @@ abstract class CatalogueElement implements Extendible<ExtensionValue>, Published
 
     int countIncomingRelationsByType(RelationshipType type) {
         CatalogueElement self = this.isAttached() ? this : get(this.id)
-        if (archived) {
-            return Relationship.countByDestinationAndRelationshipType(self, type)
-        }
-        Relationship.countByDestinationAndRelationshipTypeAndArchived(self, type, false)
-
+        return relationshipService.getRelationships([:], RelationshipDirection.INCOMING, self, type).total
     }
 
     int countOutgoingRelationsByType(RelationshipType type) {
         CatalogueElement self = this.isAttached() ? this : get(this.id)
-        if (archived) {
-            return Relationship.countBySourceAndRelationshipType(self, type)
-        }
-        Relationship.countBySourceAndRelationshipTypeAndArchived(self, type, false)
+        return relationshipService.getRelationships([:], RelationshipDirection.OUTGOING, self, type).total
     }
 
     int countRelationsByType(RelationshipType type) {
-        countOutgoingRelationsByType(type) + countIncomingRelationsByType(type)
+        CatalogueElement self = this.isAttached() ? this : get(this.id)
+        return relationshipService.getRelationships([:], RelationshipDirection.BOTH, self, type).total
     }
 
 
