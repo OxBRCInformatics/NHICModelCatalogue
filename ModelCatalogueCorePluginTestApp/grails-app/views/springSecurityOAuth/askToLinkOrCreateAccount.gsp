@@ -47,7 +47,16 @@
     <div class="container-fluid container-main">
         <div class="row">
             <div class="${grailsApplication.config.grails.mc.allow.signup ? 'col-md-12' : 'col-md-9 col-md-offset-3'}">
-                <h3><g:message code="springSecurity.oauth.registration.link.not.exists" default="No user was found with this account." args="[session.springSecurityOAuthToken?.providerName]"/></h3>
+                <div class="alert alert-info">
+                    This is the first time you are logging in with your external account.
+                    <g:if test="${grailsApplication.config.grails.mc.allow.signup}">
+                        You can sign up for a new model catalogue account or log in with existing catalogue account.
+                    </g:if>
+                    <g:else>
+                        Please, log in with you existing catalogue account. If you don't have one yet, please, contact the catalogue administrator.
+                    </g:else>
+                    Once your external and catalogue accounts are linked together you will no longer have to fill the credentials again.
+                </div>
                 <g:if test='${flash.message}'>
                     <div class='alert alert-danger'>${flash.message}</div>
                 </g:if>
