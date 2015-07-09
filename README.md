@@ -43,6 +43,11 @@ node --version
 npm --version # part of NodeJS
 git --version
 ```
+You should install the bower tool too:
+
+```
+sudo npm install -g bower
+```
 
 All tools should return their versions.
   
