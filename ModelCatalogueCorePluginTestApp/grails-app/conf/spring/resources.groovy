@@ -6,7 +6,7 @@ import  grails.plugin.executor.PersistenceContextExecutorWrapper
 // Place your Spring DSL code here
 beans = {
     authenticationEntryPoint(AjaxAwareLoginUrlAuthenticationEntryPoint) {
-        loginFormUrl = '/login/auth' // has to be specified even though it's ignored
+        loginFormUrl = '/hic/ModelCatalogue/login/auth' // has to be specified even though it's ignored
         portMapper = ref('portMapper')
         portResolver = ref('portResolver')
     }
