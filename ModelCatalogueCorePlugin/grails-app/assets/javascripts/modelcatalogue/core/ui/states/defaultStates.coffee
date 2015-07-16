@@ -1,5 +1,20 @@
 angular.module('mc.core.ui.states.defaultStates', ['ui.router', 'mc.util.ui'])
 
+
+.controller('defaultStates.registerCtrl', ['$scope', 'security', 'messages', ($scope, security,messages)->
+  $scope.register = ->
+    messages.prompt('register', null, type: 'register')
+
+  $scope.forgotPassword = ->
+    messages.prompt('forgot-password', null, type: 'forgot-password')
+])
+
+
+.controller('defaultStates.changePasswordCtrl', ['messages', '$scope', (messages, $scope)->
+  $scope.changePassword = ->
+    messages.prompt('change-password', null, type: 'change-password')
+])
+
 .controller('mc.core.ui.states.DashboardCtrl', ['$rootScope', '$scope', '$stateParams', '$state', 'security', 'catalogue', 'modelCatalogueApiRoot', 'user', 'messages', 'applicationTitle', 'names', 'statistics', ($rootScope, $scope, $stateParams, $state, security, catalogue, modelCatalogueApiRoot, user, messages, applicationTitle, names, statistics) ->
     applicationTitle "Model Catalogue"
 
@@ -710,9 +725,15 @@ angular.module('mc.core.ui.states.defaultStates', ['ui.router', 'mc.util.ui'])
 		<div class="jumbotron">
       <!-- from config mc.welcome.jumbo -->
       <div ng-bind-html="welcome.jumbo"></div>
-      <form ng-controller="defaultStates.userCtrl">
-         <button ng-click="login()" class="btn btn-large btn-primary" type="submit">Login <i class="glyphicon glyphicon-log-in"></i></button>
-         <!--a href="" class="btn btn-large btn-primary" >Sign Up <i class="glyphicon glyphicon-pencil"></i></a-->
+
+     <form >
+         <span ng-controller="defaultStates.userCtrl">
+           <button ng-click="login()" class="btn btn-large btn-primary" type="submit">Login <i class="glyphicon glyphicon-log-in"></i></button>
+         </span>
+         <span ng-controller="defaultStates.registerCtrl">
+            <button ng-click="register()" class="btn btn-large btn-primary" type="submit">Sign Up<i class="glyphicon glyphicon-pencil"></i></button>
+            <p style="font-size: 14px;cursor: pointer;"><a ng-click="forgotPassword()">Forgot your password?</a></p>
+         </span>
       </form>
     </div>
 

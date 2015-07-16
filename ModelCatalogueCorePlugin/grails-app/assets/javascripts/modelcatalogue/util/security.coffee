@@ -40,6 +40,9 @@ angular.module('mc.util.security', ['http-auth-interceptor', 'mc.util.messages',
       loginUrl      = 'j_spring_security_check'
       logoutUrl     = 'logout'
       userUrl       = 'user/current'
+      changePasswordUrl = 'register/changePassword'
+      forgotPasswordUrl = 'register/forgotPassword'
+      registerUrl ='register/register'
       usernameParam = config.username ? 'j_username'
       passwordParam = config.password ? 'j_password'
       rememberParam = config.rememberMe ? '_spring_security_remember_me'
@@ -105,6 +108,42 @@ angular.module('mc.util.security', ['http-auth-interceptor', 'mc.util.messages',
           $http(method: httpMethod, url: logoutUrl).then ->
             currentUser = null
             $state.go 'dashboard'
+
+
+        changePassword: (password, password2)->
+          params = {password:password, password2:password2}
+          $http(
+            method: httpMethod,
+            url: changePasswordUrl
+            data: params
+          ).then (result) ->
+            result
+
+
+        forgotPassword: (username,email)->
+          params = {username:username,email:email}
+          $http(
+            method: httpMethod,
+            url: forgotPasswordUrl,
+            data: params
+          ).then (result) ->
+            result
+
+
+        register: (user)->
+          params =
+            password: user.password
+            password2:user.password2
+            username:user.username
+            email: user.email
+            firstName:user.firstName
+            lastName:user.lastName
+          $http(
+            method: httpMethod,
+            url: registerUrl
+            data: params
+          ).then (result) ->
+            result
 
         requireUser: ->
           $http(method: 'GET', url: userUrl).then(handleUserResponse).then (result)->

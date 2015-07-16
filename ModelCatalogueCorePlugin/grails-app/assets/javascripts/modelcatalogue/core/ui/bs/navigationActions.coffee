@@ -152,6 +152,42 @@ angular.module('mc.core.ui.bs.navigationActions', ['mc.util.ui.actions', 'mc.uti
     action
   ]
 
+  actionsProvider.registerActionInRoles 'navbar-account', [actionsProvider.ROLE_NAVIGATION, actionsProvider.ROLE_GLOBAL_ACTION], ['security', '$state','messages', (security, $state,messages) ->
+    return undefined if not security.isUserLoggedIn()
+    action = {
+      navigation: true
+      position:   3000
+      label:      'Account'
+    }
+    action
+  ]
+
+
+  actionsProvider.registerChildAction 'navbar-account', 'navbar-change-password', ['security','$scope', '$state','messages', (security,$scope, $state,messages) ->
+    return undefined if not security.isUserLoggedIn()
+    action = {
+      position:    400
+      label:      'Change Password'
+      icon:       'fa fa-pencil-square-o'
+      action: ->
+        messages.prompt('change-password', null, type: 'change-password')
+    }
+    action
+  ]
+
+#  actionsProvider.registerChildAction 'navbar-account', 'navbar-admin', ['security','$scope', '$state','messages','$window','$location', (security,$scope, $state,messages,$window,$location) ->
+#    return undefined if not security.hasRole('ADMIN')
+#    action = {
+#      position:    400
+#      label:      'Users & Roles'
+#      icon:   'fa fa-users'
+#      action: ->
+#        $window.location.href = "userAdmin";
+#    }
+#    action
+#  ]
+
+
   toggleClassification = (global) -> ['security', 'messages', '$scope', 'rest', 'enhance', 'modelCatalogueApiRoot', '$state', '$stateParams', (security, messages, $scope, rest, enhance, modelCatalogueApiRoot, $state, $stateParams) ->
     return undefined if not security.isUserLoggedIn()
 

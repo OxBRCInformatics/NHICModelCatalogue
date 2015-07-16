@@ -7,6 +7,8 @@ class User extends CatalogueElement {
 
     transient modelCatalogueSecurityService
 
+	String firstName
+	String lastName
     String username
     String password
     String email
@@ -16,6 +18,8 @@ class User extends CatalogueElement {
     boolean passwordExpired
 
     static constraints = {
+		firstName blank:true,nullable: true
+		lastName blank:true,nullable: true
         username blank: false, unique: true, maxSize: 255
         password blank: false, maxSize: 255
         email    nullable: true, email: true, maxSize: 255

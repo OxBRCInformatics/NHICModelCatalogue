@@ -82,6 +82,7 @@ environments {
     development {
         grails.logging.jul.usebridge = true
         grails.serverURL = "http://localhost:${System.getProperty('server.port') ?: 8080}/ModelCatalogueCorePluginTestApp"
+		grails.mail.disabled = true
 //        discourse {
 //            url = "http://192.168.1.123/"
 //            api {
@@ -139,6 +140,15 @@ environments {
         grails.serverURL =  "http://localhost:${System.getProperty('server.port') ?: 8080}/ModelCatalogueCorePluginTestApp"
     }
     production {
+		grails.mail.host = System.env.MC_MAIL_HOST ?: 'smtp.gmail.com'
+		grails.mail.port = System.env.MC_MAIL_PORT ?: 587
+		grails.mail.username = System.env.MC_MAIL_USER ?: ''
+		grails.mail.password = System.env.MC_MAIL_PASS ?: ''
+		grails.mail.props = ["mail.smtp.auth": "true",
+							 "mail.smtp.socketFactory.port": "465",
+							 "mail.smtp.socketFactory.class": "javax.net.ssl.SSLSocketFactory",
+							 "mail.smtp.socketFactory.fallback": "false"]
+
         grails.assets.minifyOptions = [
                 strictSemicolons: false,
                 mangleOptions: [mangle: false, toplevel: false, defines: null, except: null, no_functions:false],
@@ -304,8 +314,9 @@ grails.assets.plugin."model-catalogue-core-plugin".excludes = [
 grails.plugin.springsecurity.useBasicAuth = true
 grails.plugin.springsecurity.basic.realmName = "Model Catalogue"
 grails.plugin.springsecurity.filterChain.chainMap = [
-        '/catalogue/upload': 'JOINED_FILTERS,-exceptionTranslationFilter',
-        '/**': 'JOINED_FILTERS,-basicAuthenticationFilter,-basicExceptionTranslationFilter'
+        '/catalogue/upload':        'JOINED_FILTERS,-exceptionTranslationFilter',
+        '/catalogue/*/*/export':    'JOINED_FILTERS,-exceptionTranslationFilter',
+        '/**':                      'JOINED_FILTERS,-basicAuthenticationFilter,-basicExceptionTranslationFilter'
 ]
 grails.plugin.springsecurity.logout.handlerNames = [
         'rememberMeServices',

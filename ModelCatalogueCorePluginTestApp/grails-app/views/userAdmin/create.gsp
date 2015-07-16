@@ -8,7 +8,7 @@
 
 <body>
 
-<h3>TEST3<g:message code="default.create.label" args="[entityName]"/>TEST</h3>
+<h3><g:message code="default.create.label" args="[entityName]"/></h3>
 
 <g:form action="save" name='userCreateForm'>
 
@@ -24,16 +24,22 @@ tabData << [name: 'roles',    icon: 'icon_role', messageCode: 'spring.security.u
 		<table>
 		<tbody>
 
-			<s2ui:textFieldRow name='username' labelCode='user.username.label' bean="${user}"
+
+
+        <s2ui:textFieldRow name='firstName' labelCode='user.firstName.label' bean="${user}"
+                           labelCodeDefault='First Name' value="${user?.firstName}"/>
+
+        <s2ui:textFieldRow name='lastName' labelCode='user.lastName.label' bean="${user}"
+                           labelCodeDefault='Last Name' value="${user?.lastName}"/>
+
+        <s2ui:textFieldRow name='email' labelCode='user.email.label' bean="${user}"
+                           labelCodeDefault='Email' value="${user?.email}"/>
+
+        <s2ui:textFieldRow name='username' labelCode='user.username.label' bean="${user}"
                             labelCodeDefault='Username' value="${user?.username}"/>
 
 			<s2ui:passwordFieldRow name='password' labelCode='user.password.label' bean="${user}"
                                 labelCodeDefault='Password' value="${user?.password}"/>
-
-			<s2ui:textFieldRow name='email' labelCode='user.username.email' bean="${user}"
-							   labelCodeDefault='Email' value="${user?.email}"/>
-
-            <input type='hidden' name="name" bean="${user}" value="${user?.username}"/>
 
 			<s2ui:checkboxRow name='enabled' labelCode='user.enabled.label' bean="${user}"
                            labelCodeDefault='Enabled' value="${user?.enabled}"/>

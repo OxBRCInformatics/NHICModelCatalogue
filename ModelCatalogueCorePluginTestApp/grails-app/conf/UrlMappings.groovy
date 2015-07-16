@@ -7,6 +7,10 @@ class UrlMappings {
             }
         }
 
+		"/register/changePassword"(controller:"register", action: "changePassword")
+		"/register/register"(controller:"register", action: "register")
+		"/register"(redirect: "/")
+		"/register/index"(redirect:"/")
         "/"(view:"/index")
 	}
 }
