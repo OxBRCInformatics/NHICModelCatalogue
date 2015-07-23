@@ -338,10 +338,15 @@ grails.plugin.springsecurity.ajaxCheckClosure = { request ->
 
 //language=HTML
 mc.welcome.jumbo = """
-<h1>Model Catalogue</h1>
-<p class="lead">
-    <b><em>Model</em></b> existing business processes and context. <b><em>Design</em></b> and version new datasets <b><em>Generate</em></b> better software components
-</p>
+    <div class="row">
+        <div class="col-md-9">
+            <h1>NIHR HIC <br/>Model Catalogue</h1>
+            <p>Data models and terminologies for the NIHR Health Informatics Collaborative</p>
+        </div>
+        <div class="col-md-3">
+            <img src="images/NIHRlogo.png" class="img-responsive">
+        </div>
+    </div>
 """
 
 mc.welcome.info = """

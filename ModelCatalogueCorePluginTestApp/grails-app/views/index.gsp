@@ -13,7 +13,7 @@
 
     <asset:javascript src="ng-file-upload-shim/angular-file-upload-shim.min.js"/>
 
-    <title>Model Catalogue Demo App</title>
+    <title>NIHR HIC Model Catalogue</title>
     <g:if test="${Environment.current in [Environment.DEVELOPMENT, Environment.TEST, Environment.CUSTOM]}">
         <script type="text/javascript">
             window.pendingErrorsPres = [];
@@ -135,7 +135,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"><span class="fa fa-fw fa-book"></span><span class="hidden-sm">&nbsp; Model Catalogue</span></a>
+                <a class="navbar-brand" href="#"><span class="fa fa-fw fa-book"></span><span class="hidden-sm">NIHR HIC Model Catalogue</span></a>
             </div>
 
             <div class="navbar-collapse collapse">
