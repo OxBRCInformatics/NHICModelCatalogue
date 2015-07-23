@@ -26,11 +26,13 @@ class BootStrap {
         ExtensionModulesLoader.addExtensionModules()
 
         if (Environment.current in [Environment.DEVELOPMENT, Environment.TEST]) {
-            TestDataHelper.initFreshDb(sessionFactory, 'initTestDatabase.sql') {
-                initCatalogueService.initCatalogue(true)
-                initSecurity()
-                setupStuff()
-            }
+//            TestDataHelper.initFreshDb(sessionFactory, 'initTestDatabase.sql') {
+//                initCatalogueService.initCatalogue(true)
+//                initSecurity()
+//                setupStuff()
+//              }
+          initCatalogueService.initDefaultRelationshipTypes()
+            initSecurity()
         } else {
             initCatalogueService.initDefaultRelationshipTypes()
             initSecurity()
@@ -122,8 +124,8 @@ class BootStrap {
         try {
 
             println 'Running post init job'
-            println 'Importing data'
-            importService.importData()
+            //println 'Importing data'
+            //importService.importData()
 
             println 'Finalizing all published elements'
             CatalogueElement.findAllByStatus(org.modelcatalogue.core.api.ElementStatus.DRAFT).each {
