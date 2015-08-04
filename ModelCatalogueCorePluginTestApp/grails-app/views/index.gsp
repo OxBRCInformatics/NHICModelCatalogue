@@ -147,9 +147,12 @@
                     </li>
 
                 </ul>
-
-                <form class="navbar-form navbar-right hidden-xs" ng-controller="defaultStates.userCtrl">
-                    <button show-if-logged-in ng-click="logout()" class="btn btn-danger"  type="submit"><i class="glyphicon glyphicon-log-out"></i></button>
+                <form show-if-logged-in style="padding:0px 15px 0px 5px !important;width:150px !important;margin-bottom: 0px !important;" class="navbar-form navbar-right hidden-xs" ng-controller="defaultStates.userCtrl">
+                    <button style="float:left;" show-if-logged-in ng-click="logout()" class="btn btn-danger"  type="submit"><i class="glyphicon glyphicon-log-out"></i></button>
+                    <p  style="font-size: 12px !important;padding-left: 45px !important;margin-bottom: 0px !important;"> Logged in as </p>
+                    <p  style="font-size: 12px !important;padding-left: 45px !important; word-wrap: break-word;width: 150px;"><a style="text-decoration:none">  ${sec.username()}</a></p>
+                </form>
+                <form  class="navbar-form navbar-right hidden-xs" ng-controller="defaultStates.userCtrl">
                     <button hide-if-logged-in ng-click="login()"  class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-log-in"></i></button>
                 </form>
 
