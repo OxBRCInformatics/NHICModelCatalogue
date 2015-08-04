@@ -580,6 +580,11 @@ angular.module('mc.core.ui.states.defaultStates', ['ui.router', 'mc.util.ui'])
   ])
 
 .controller('defaultStates.userCtrl', ['$scope', 'security', ($scope, security)->
+
+    #return details of the current logged in User
+    $scope.getCurrentUser = ->
+      security.getCurrentUser()
+
     $scope.logout = ->
       security.logout()
     $scope.login = ->
