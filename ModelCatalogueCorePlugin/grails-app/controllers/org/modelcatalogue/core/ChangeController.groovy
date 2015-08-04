@@ -18,8 +18,19 @@ class ChangeController extends RestfulController<Change> {
 
     def auditService
     def classificationService
+	def modelCatalogueSecurityService
+
+	private def notAuthorized(){
+		render status: UNAUTHORIZED
+	}
 
     def undo() {
+
+		if (!modelCatalogueSecurityService.hasRole('ADMIN')) {
+			notAuthorized()
+			return
+		}
+
         Change change = Change.get(params.id)
 
         if (!change) {
@@ -36,6 +47,12 @@ class ChangeController extends RestfulController<Change> {
     }
 
     def changes() {
+
+		if (!modelCatalogueSecurityService.hasRole('ADMIN')) {
+			notAuthorized()
+			return
+		}
+
         if (!params.max) {
             params.max = 10
         } else {
@@ -52,6 +69,12 @@ class ChangeController extends RestfulController<Change> {
     }
 
     def global() {
+
+		 if (!modelCatalogueSecurityService.hasRole('ADMIN')) {
+			notAuthorized()
+			return
+		}
+
         if (!params.max) {
             params.max = 10
         } else {
@@ -62,6 +85,12 @@ class ChangeController extends RestfulController<Change> {
     }
 
     def classificationActivity(Integer max) {
+
+		if (!modelCatalogueSecurityService.hasRole('ADMIN')) {
+			notAuthorized()
+			return
+		}
+
         params.max = Math.min(max ?: 10, 100)
         Classification element = Classification.get(params.id)
         if (!element) {
@@ -73,6 +102,12 @@ class ChangeController extends RestfulController<Change> {
     }
 
     def userActivity(Integer max) {
+
+		if (!modelCatalogueSecurityService.hasRole('ADMIN')) {
+			notAuthorized()
+			return
+		}
+
         params.max = Math.min(max ?: 10, 100)
         User element = User.get(params.id)
         if (!element) {

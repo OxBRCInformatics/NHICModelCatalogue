@@ -113,6 +113,7 @@ changes.config ['actionsProvider', (actionsProvider)->
 
   actionsProvider.registerActionInRoles 'feed', [actionsProvider.ROLE_NAVIGATION, actionsProvider.ROLE_GLOBAL_ACTION], ['security', '$state', (security, $state) ->
     return undefined if not security.isUserLoggedIn()
+    return undefined if not security.hasRole('ADMIN')
 
     {
       position:   1500
