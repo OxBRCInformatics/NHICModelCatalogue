@@ -45,8 +45,10 @@ angular.module('mc.core.ui.bs.modalPromptLogin', ['mc.util.messages', 'ngCookies
             $scope.login = ->
               security.login($scope.user.username, $scope.user.password, $scope.user.rememberMe).then (success)->
                 if success.data.error
+                  $scope.messages.clearAllMessages() # removes all current displayed error messages
                   $scope.messages.error success.data.error
                 else if success.data.errors
+                  $scope.messages.clearAllMessages() # removes all current displayed error messages
                   for error in success.data.errors
                     $scope.messages.error error
                 else
