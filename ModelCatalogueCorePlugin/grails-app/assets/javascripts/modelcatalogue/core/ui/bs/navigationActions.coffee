@@ -76,16 +76,16 @@ angular.module('mc.core.ui.bs.navigationActions', ['mc.util.ui.actions', 'mc.uti
       ]
 
 
-  actionsProvider.registerActionInRole 'navbar-data-architect', actionsProvider.ROLE_NAVIGATION, ['security', (security) ->
-    return undefined if not security.hasRole('CURATOR')
-
-    {
-      navigation: true
-      abstract:   true
-      position:   1000
-      label:      'Data Architect'
-    }
-  ]
+#  actionsProvider.registerActionInRole 'navbar-data-architect', actionsProvider.ROLE_NAVIGATION, ['security', (security) ->
+#    return undefined if not security.hasRole('CURATOR')
+#
+#    {
+#      navigation: true
+#      abstract:   true
+#      position:   1000
+#      label:      'Data Architect'
+#    }
+#  ]
 
   uninstantiatedElements = ['$scope', '$state', ($scope, $state) ->
     action = {
@@ -101,38 +101,38 @@ angular.module('mc.core.ui.bs.navigationActions', ['mc.util.ui.actions', 'mc.uti
 
     action
   ]
-  actionsProvider.registerChildAction 'navbar-data-architect', 'navbar-uninstantiated-elements', uninstantiatedElements
+#  actionsProvider.registerChildAction 'navbar-data-architect', 'navbar-uninstantiated-elements', uninstantiatedElements
   actionsProvider.registerActionInRole 'global-uninstantiated-elements', actionsProvider.ROLE_GLOBAL_ACTION, uninstantiatedElements
 
-  actionsProvider.registerChildAction 'navbar-data-architect', 'navbar-relations-by-metadata-key', ['$scope', '$state', ($scope, $state) ->
-    action = {
-      position:    300
-      label:      'Create COSD Synonym Data Element Relationships'
-      icon:       'fa fa-fw fa-exchange'
-      action: ->
-        $state.go 'mc.dataArchitect.findRelationsByMetadataKeys'
-    }
+#  actionsProvider.registerChildAction 'navbar-data-architect', 'navbar-relations-by-metadata-key', ['$scope', '$state', ($scope, $state) ->
+#    action = {
+#      position:    300
+#      label:      'Create COSD Synonym Data Element Relationships'
+#      icon:       'fa fa-fw fa-exchange'
+#      action: ->
+#        $state.go 'mc.dataArchitect.findRelationsByMetadataKeys'
+#    }
+#
+#    $scope.$on '$stateChangeSuccess', (ignored, state) ->
+#      action.active = state.name == 'mc.dataArchitect.findRelationsByMetadataKeys'
+#
+#    action
+#  ]
 
-    $scope.$on '$stateChangeSuccess', (ignored, state) ->
-      action.active = state.name == 'mc.dataArchitect.findRelationsByMetadataKeys'
-
-    action
-  ]
-
-  actionsProvider.registerChildAction 'navbar-data-architect', 'navbar-element-without-key', ['$scope', '$state', ($scope, $state) ->
-    action = {
-      position:    400
-      label:      'Data Elements without Metadata Key'
-      icon:       'fa fa-fw fa-key'
-      action: ->
-        $state.go 'mc.dataArchitect.metadataKey'
-    }
-
-    $scope.$on '$stateChangeSuccess', (ignored, state) ->
-      action.active = state.name == 'mc.dataArchitect.metadataKey'
-
-    action
-  ]
+#  actionsProvider.registerChildAction 'navbar-data-architect', 'navbar-element-without-key', ['$scope', '$state', ($scope, $state) ->
+#    action = {
+#      position:    400
+#      label:      'Data Elements without Metadata Key'
+#      icon:       'fa fa-fw fa-key'
+#      action: ->
+#        $state.go 'mc.dataArchitect.metadataKey'
+#    }
+#
+#    $scope.$on '$stateChangeSuccess', (ignored, state) ->
+#      action.active = state.name == 'mc.dataArchitect.metadataKey'
+#
+#    action
+#  ]
 
 
   actionsProvider.registerActionInRoles 'cart', [actionsProvider.ROLE_NAVIGATION, actionsProvider.ROLE_GLOBAL_ACTION], ['security', '$state', (security, $state) ->
