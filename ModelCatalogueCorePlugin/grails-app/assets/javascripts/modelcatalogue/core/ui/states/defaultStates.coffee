@@ -970,8 +970,9 @@ angular.module('mc.core.ui.states.defaultStates', ['ui.router', 'mc.util.ui'])
             </div>
         </div>
       </div>
-    </div>
-    <div class="panel panel-default">
+</div>
+<div hide-if-logged-in>
+<div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
               <div class=" col-xs-12 col-sm-12 col-md-4 col-lg-4"><p>Model catalogue development supported by</p></div>
@@ -998,6 +999,7 @@ angular.module('mc.core.ui.states.defaultStates', ['ui.router', 'mc.util.ui'])
             </div>
         </div>
     </div>
+</div>
 
   '''
 
