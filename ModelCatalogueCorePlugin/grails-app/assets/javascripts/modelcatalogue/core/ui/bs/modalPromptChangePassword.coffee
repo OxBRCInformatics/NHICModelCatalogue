@@ -11,12 +11,17 @@ angular.module('mc.core.ui.bs.modalPromptChangePassword', ['mc.util.messages', '
             <messages-panel messages="messages"></messages-panel>
             <form role="form" ng-submit="change()">
               <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Password" ng-model="user.password">
+                <label for="oldPassword">Current Password</label>
+                <input type="password" class="form-control" id="oldPassword" placeholder="Current Password" ng-model="user.oldPassword">
+              </div>
+
+              <div class="form-group">
+                <label for="password">New Password</label>
+                <input type="password" class="form-control" id="password" placeholder="New Password" ng-model="user.password">
               </div>
               <div class="form-group">
                 <label for="password2">Confirm Password</label>
-                <input type="password" class="form-control" id="password2" placeholder="Confirm Password" ng-model="user.password2">
+                <input type="password" class="form-control" id="password2" placeholder="Confirm New Password" ng-model="user.password2">
               </div>
               <button type="submit" class="hide" ng-click="change()"></button>
             </form>
@@ -33,7 +38,7 @@ angular.module('mc.core.ui.bs.modalPromptChangePassword', ['mc.util.messages', '
 
             $scope.change = ->
               $scope.messages.clearAllMessages()
-              security.changePassword($scope.user.password, $scope.user.password2).then (success)->
+              security.changePassword($scope.user).then (success)->
                 if success.data.error
                   $scope.messages.error success.data.error
                 else if success.data.errors
@@ -41,6 +46,7 @@ angular.module('mc.core.ui.bs.modalPromptChangePassword', ['mc.util.messages', '
                     $scope.messages.error error
                 else
                   $modalInstance.close success
+                  messages.success "Your password updated successfully"
         ]
 
       }

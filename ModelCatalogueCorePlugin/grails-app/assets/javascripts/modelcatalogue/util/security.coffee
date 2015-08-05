@@ -110,8 +110,8 @@ angular.module('mc.util.security', ['http-auth-interceptor', 'mc.util.messages',
             $state.go 'dashboard'
 
 
-        changePassword: (password, password2)->
-          params = {password:password, password2:password2}
+        changePassword: (user)->
+          params = {oldPassword:user.oldPassword,password:user.password, password2:user.password2}
           $http(
             method: httpMethod,
             url: changePasswordUrl

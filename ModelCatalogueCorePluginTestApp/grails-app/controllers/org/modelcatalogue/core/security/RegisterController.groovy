@@ -4,6 +4,7 @@ import grails.converters.JSON
 import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.plugin.springsecurity.authentication.dao.NullSaltSource
 import grails.plugin.springsecurity.ui.RegistrationCode
+import grails.plugin.springsecurity.ui.SpringSecurityUiService
 
 class RegisterController extends grails.plugin.springsecurity.ui.RegisterController {
 
@@ -323,11 +324,24 @@ class RegisterCommand {
 
 class ResetPasswordCommand {
 	String username
+ 	String oldPassword
 	String password
 	String password2
+	def springSecurityService
+	def saltSource
+	def passwordEncoder
 
 	static constraints = {
-		username nullable: false
+		username nullable: true
+ 		oldPassword nullable:false, blank:false, validator: { value, command ->
+			if (value) {
+				def user = command.springSecurityService.getCurrentUser()
+				String salt = command.saltSource instanceof NullSaltSource ? null : user.username
+				if (!command.passwordEncoder.isPasswordValid(user.password, value, salt)) {
+					return 'registerCommand.oldPassword.incorrect'
+				}
+			}
+		}
 		password blank: false, nullable: false, validator: org.modelcatalogue.core.security.RegisterController.betterPasswordValidator
 		password2 validator: org.modelcatalogue.core.security.RegisterController.password2Validator
 	}
