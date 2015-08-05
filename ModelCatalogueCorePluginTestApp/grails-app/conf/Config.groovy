@@ -370,3 +370,5 @@ mc.welcome.info = """
 <p></p>
 </div>
 """
+
+mc.webAppTitle = "NIHR HIC Model Catalogue"
