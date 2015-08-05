@@ -579,11 +579,15 @@ angular.module('mc.core.ui.states.defaultStates', ['ui.router', 'mc.util.ui'])
 
   ])
 
-.controller('defaultStates.userCtrl', ['$scope', 'security', ($scope, security)->
+.controller('defaultStates.userCtrl', ['$scope', 'security', 'messages', ($scope, security,messages)->
 
     #return details of the current logged in User
     $scope.getCurrentUser = ->
       security.getCurrentUser()
+
+    #Show the message when the end user successfully adds new password
+    $scope.forgottenPasswordChanged = ->
+      messages.success "Your password updated successfully"
 
     $scope.logout = ->
       security.logout()

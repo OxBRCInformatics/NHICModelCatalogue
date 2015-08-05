@@ -238,9 +238,11 @@ class RegisterController extends grails.plugin.springsecurity.ui.RegisterControl
 			registrationCode.delete()
 		}
 
-		springSecurityService.reauthenticate registrationCode.username
+		//reAuthenticate the user, but it is better to comment it
+		//springSecurityService.reauthenticate registrationCode.username
 
 		flash.message = message(code: 'spring.security.ui.resetPassword.success')
+		flash.forgottenPasswordChanged = true
 
 		def conf = SpringSecurityUtils.securityConfig
 		String postResetUrl = conf.ui.register.postResetUrl ?: conf.successHandler.defaultTargetUrl

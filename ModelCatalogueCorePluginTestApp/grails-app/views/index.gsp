@@ -158,6 +158,10 @@
 
                 <ng-include src="'modelcatalogue/core/ui/omnisearch.html'"></ng-include>
 
+                <g:if test="${flash.forgottenPasswordChanged}">
+                    <div ng-controller="defaultStates.userCtrl" data-ng-init="forgottenPasswordChanged()"></div>
+                </g:if>
+                </p>
             </div><!--/.nav-collapse -->
         </div>
     </div>
