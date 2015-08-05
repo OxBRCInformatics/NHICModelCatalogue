@@ -78,6 +78,9 @@ class RegisterController extends grails.plugin.springsecurity.ui.RegisterControl
 		mailService.sendMail {
 			from "Model Catalogue <${conf.ui.forgotPassword.emailFrom}>"
 			to "${command.firstName} ${command.lastName}<${command.email}>"
+			if(grailsApplication.config.grails?.mail?.adminEmails) {
+				bcc grailsApplication.config.grails?.mail?.adminEmails
+			}
 			// FIXME needs to be refactored into a messages class - i18n support
 			subject "New Account"
 			html(body)
