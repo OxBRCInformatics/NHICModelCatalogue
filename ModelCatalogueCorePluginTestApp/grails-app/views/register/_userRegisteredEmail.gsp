@@ -2,8 +2,8 @@
 
 Hi ${user.firstName},<br>
 <br>
-Great news! Your <strong>Model Catalogue</strong> account has been activated.
-<br>
+Great news! Your <strong>Model Catalogue</strong> account has been created.<br>
+We will review and activate it within a couple of hours.<br><br>
 Your account details are as follows:<br>
 Username: ${user.username}<br>
 First name: ${user.firstName}<br>
