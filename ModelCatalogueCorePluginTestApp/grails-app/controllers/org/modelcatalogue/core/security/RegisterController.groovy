@@ -315,7 +315,14 @@ class RegisterCommand {
 				}
 			}
 		}
-		email blank: false, nullable: false, email: true
+		email blank: false, nullable: false, email: true,  validator: { value, command ->
+			if (value) {
+				def User = command.grailsApplication.getDomainClass(SpringSecurityUtils.securityConfig.userLookup.userDomainClassName).clazz
+				if (User.findByEmail(value)) {
+					return 'registerCommand.email.unique'
+				}
+			}
+		}
 		password blank: false, nullable: false, validator: org.modelcatalogue.core.security.RegisterController.betterPasswordValidator
 		password2 validator: org.modelcatalogue.core.security.RegisterController.password2Validator
 		password2 validator: org.modelcatalogue.core.security.RegisterController.password2Validator
