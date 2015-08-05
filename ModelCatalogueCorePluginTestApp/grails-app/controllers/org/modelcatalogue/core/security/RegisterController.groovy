@@ -57,7 +57,7 @@ class RegisterController extends grails.plugin.springsecurity.ui.RegisterControl
 			return
 		}
 
-//		def conf = SpringSecurityUtils.securityConfig
+		def conf = SpringSecurityUtils.securityConfig
 //		String url = generateLink('verifyRegistration', [t: registrationCode.token])
 //		def body = conf.ui.register.emailBody
 //		if (body.contains('$')) {
@@ -76,7 +76,7 @@ class RegisterController extends grails.plugin.springsecurity.ui.RegisterControl
 		def body = g.render(template: "userRegisteredEmail", model: [user: user, mcURL: siteUrl])
 
 		mailService.sendMail {
-			from conf.ui.forgotPassword.emailFrom
+			from "Model Catalogue <${conf.ui.forgotPassword.emailFrom}>"
 			to "${command.firstName} ${command.lastName}<${command.email}>"
 			// FIXME needs to be refactored into a messages class - i18n support
 			subject "New Account"
@@ -193,7 +193,7 @@ class RegisterController extends grails.plugin.springsecurity.ui.RegisterControl
 
 		mailService.sendMail {
 			to user.email
-			from conf.ui.forgotPassword.emailFrom
+			from "Model Catalogue <${conf.ui.forgotPassword.emailFrom}>"
 			subject conf.ui.forgotPassword.emailSubject
 			html body.toString()
 		}
