@@ -63,7 +63,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="${createLink(uri: '/')}">Model Catalogue</a>
+                <a class="navbar-brand" href="${createLink(uri: '/')}">
+                    <span class="fa fa-fw fa-book"></span>
+                    <g:if test="grailsApplication?.config?.mc?.webAppTitle">
+                        ${grailsApplication.config.mc.webAppTitle}
+                    </g:if>
+                    <g:else>Model Catalogue</g:else>
+                </a>
             </div>
         </div>
     </div>
