@@ -55,19 +55,19 @@ Genomics England Custom Additions to Model Catalogue
         // TODO Implement post initialization spring config (optional)
         ReportsRegistry reportsRegistry = ctx.getBean(ReportsRegistry)
 
-        reportsRegistry.register {
-            creates asset
-            title { "Export  XML Schema Definition(XSD) " }
-            type Model
-            link controller: 'gelXml', action: 'generateXSD',id: true
-        }
+//        reportsRegistry.register {
+//            creates asset
+//            title { "Export  XML Schema Definition(XSD) " }
+//            type Model
+//            link controller: 'gelXml', action: 'generateXSD',id: true
+//        }
 
-        reportsRegistry.register {
-            creates asset
-            title { "Export  XML Shredder Model" }
-            type Model
-            link controller: 'gelXml', action: 'generateXmlShredderModel',id: true
-        }
+//        reportsRegistry.register {
+//            creates asset
+//            title { "Export  XML Shredder Model" }
+//            type Model
+//            link controller: 'gelXml', action: 'generateXmlShredderModel',id: true
+//        }
 
     }
 
