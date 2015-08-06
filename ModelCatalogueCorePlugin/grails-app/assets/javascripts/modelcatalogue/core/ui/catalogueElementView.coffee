@@ -3,6 +3,7 @@ angular.module('mc.core.ui.catalogueElementView', ['mc.core.catalogueElementEnha
     replace: true
     scope:
       element: '='
+      showEmptyTabs: '='
       property: '=?'
       id: '@'
 
@@ -139,6 +140,14 @@ angular.module('mc.core.ui.catalogueElementView', ['mc.core.catalogueElementEnha
             tabDefinition.active = true
             $scope.$broadcast 'infiniteTableRedraw'
             activeTabSet = true
+
+          # Do not display Empty Tabs, Except for DataElements
+          if($scope.showEmptyTabs == false ||  $scope.showEmptyTabs == undefined)
+            if ( ( (tabDefinition.type == "metadata-editor" && tabDefinition.value.values.length == 0) ||
+                   (tabDefinition.type == "decorated-list" && tabDefinition.value.total == 0) ||
+                   (tabDefinition.type == "history-tab" &&  tabDefinition.value.total == 0) ) &&
+                   tabDefinition.heading != "Data Elements")
+              continue
 
           tabs.push tabDefinition
 

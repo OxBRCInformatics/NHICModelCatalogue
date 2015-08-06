@@ -705,7 +705,7 @@ angular.module('mc.core.ui.states.defaultStates', ['ui.router', 'mc.util.ui'])
 
     $templateCache.put 'modelcatalogue/core/ui/state/show.html', '''
     <div ng-show="element">
-      <catalogue-element-view element="element"></catalogue-element-view>
+      <catalogue-element-view element="element" show-empty-tabs="true"></catalogue-element-view>
     </div>
   '''
 
