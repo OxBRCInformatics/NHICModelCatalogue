@@ -29,8 +29,14 @@ angular.module('mc.core.ui.bs.catalogueElementProperties', []).config ['catalogu
     dataType = relationship?.relation?.valueDomain?.dataType
     if dataType?.enumerations?.values
       ext     = dataType?.enumerations?.values ? []
+
+      displayedCount = 0
       for e in ext
-        result += "#{e.key} \n"
+        if(displayedCount >= 5)
+          result += "....\n"
+          break
+        result += "#{e.key}: #{e.value} \n"
+        displayedCount++
     else if dataType
       result = dataType?.name
     result
