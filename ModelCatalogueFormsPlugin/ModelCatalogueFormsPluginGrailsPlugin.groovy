@@ -55,12 +55,12 @@ Forms generator plugin for Model Catalogue
         // TODO Implement post initialization spring config (optional)
         ReportsRegistry reportsRegistry = ctx.getBean(ReportsRegistry)
 
-        reportsRegistry.register {
-            creates asset
-            type Model
-            title { "Export as Case Report From" }
-            link controller: 'formGenerator', action: 'generateForm', id: true
-        }
+//        reportsRegistry.register {
+//            creates asset
+//            type Model
+//            title { "Export as Case Report From" }
+//            link controller: 'formGenerator', action: 'generateForm', id: true
+//        }
 
     }
 
