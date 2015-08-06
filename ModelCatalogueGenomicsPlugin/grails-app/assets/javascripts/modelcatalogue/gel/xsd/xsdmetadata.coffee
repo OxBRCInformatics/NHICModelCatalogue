@@ -4,59 +4,59 @@ xsd = angular.module('mc.core.xsd', ['mc.core.ui.metadataEditors'])
 
 # TODO: inline help
 xsd.config ['metadataEditorsProvider', (metadataEditorsProvider)->
-  metadataEditorsProvider.register {
-    title: 'XSD (Metadata)'
-    types: [
-      'model'
-      '=[hierarchy]=>'
-    ]
-    keys: [
-      "http://xsd.modelcatalogue.org/metadata#schemaName"
-      "http://xsd.modelcatalogue.org/metadata#schemaVersion"
-      "http://xsd.modelcatalogue.org/metadata#schemaVersionDescription"
-      "http://xsd.modelcatalogue.org/section#type"
-    ]
-    template: 'modelcatalogue/core/ui/metadataEditors/xsdMetadata.html'
-  }
+#  metadataEditorsProvider.register {
+#    title: 'XSD (Metadata)'
+#    types: [
+#      'model'
+#      '=[hierarchy]=>'
+#    ]
+#    keys: [
+#      "http://xsd.modelcatalogue.org/metadata#schemaName"
+#      "http://xsd.modelcatalogue.org/metadata#schemaVersion"
+#      "http://xsd.modelcatalogue.org/metadata#schemaVersionDescription"
+#      "http://xsd.modelcatalogue.org/section#type"
+#    ]
+#    template: 'modelcatalogue/core/ui/metadataEditors/xsdMetadata.html'
+#  }
 
-  metadataEditorsProvider.register {
-    title: 'XSD( Datatype Restrictions)'
-    types: [
-      'dataElement'   
-      'valueDomain'
-      '=[containment]=>'
-    ]
-
-    keys: [
-           "http://xsd.modelcatalogue.org/restrictions#length"
-           "http://xsd.modelcatalogue.org/restrictions#minLength"
-           "http://xsd.modelcatalogue.org/restrictions#maxLength"
-           "http://xsd.modelcatalogue.org/restrictions#maxInclusive"
-           "http://xsd.modelcatalogue.org/restrictions#minInclusive"
-           "http://xsd.modelcatalogue.org/restrictions#maxExclusive"
-           "http://xsd.modelcatalogue.org/restrictions#minExclusive"
-           "http://xsd.modelcatalogue.org/restrictions#totalDigits"
-           "http://xsd.modelcatalogue.org/restrictions#fractionDigits"
-           "http://xsd.modelcatalogue.org/restrictions#pattern"
-    ]
-    template: 'modelcatalogue/core/ui/metadataEditors/xsdItemValueDomainRestriction.html'
-  }
-  metadataEditorsProvider.register {
-    title: 'Occurences(Metadata)'
-    types: [
-          'dataElement'   
-          'valueDomain'
-          '=[containment]=>'
-          'model'
-          '=[hierarchy]=>'
-        ]
-
-    keys: [
-               "Min Occurs"
-               "Max Occurs"
-    ]
-    template: 'modelcatalogue/core/ui/metadataEditors/metadataOccurence.html'
-  }
+#  metadataEditorsProvider.register {
+#    title: 'XSD( Datatype Restrictions)'
+#    types: [
+#      'dataElement'
+#      'valueDomain'
+#      '=[containment]=>'
+#    ]
+#
+#    keys: [
+#           "http://xsd.modelcatalogue.org/restrictions#length"
+#           "http://xsd.modelcatalogue.org/restrictions#minLength"
+#           "http://xsd.modelcatalogue.org/restrictions#maxLength"
+#           "http://xsd.modelcatalogue.org/restrictions#maxInclusive"
+#           "http://xsd.modelcatalogue.org/restrictions#minInclusive"
+#           "http://xsd.modelcatalogue.org/restrictions#maxExclusive"
+#           "http://xsd.modelcatalogue.org/restrictions#minExclusive"
+#           "http://xsd.modelcatalogue.org/restrictions#totalDigits"
+#           "http://xsd.modelcatalogue.org/restrictions#fractionDigits"
+#           "http://xsd.modelcatalogue.org/restrictions#pattern"
+#    ]
+#    template: 'modelcatalogue/core/ui/metadataEditors/xsdItemValueDomainRestriction.html'
+#  }
+#  metadataEditorsProvider.register {
+#    title: 'Occurences(Metadata)'
+#    types: [
+#          'dataElement'
+#          'valueDomain'
+#          '=[containment]=>'
+#          'model'
+#          '=[hierarchy]=>'
+#        ]
+#
+#    keys: [
+#               "Min Occurs"
+#               "Max Occurs"
+#    ]
+#    template: 'modelcatalogue/core/ui/metadataEditors/metadataOccurence.html'
+#  }
 ]
 
 xsd.run ['$templateCache', ($templateCache) ->
