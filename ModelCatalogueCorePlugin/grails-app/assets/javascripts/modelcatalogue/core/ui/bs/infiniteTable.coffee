@@ -81,7 +81,7 @@ angular.module('mc.core.ui.bs.infiniteTable', ['mc.core.ui.infiniteTable', 'ngSa
             <tr class="active inf-table-footer-action" ng-if="!loading" ng-click="footerAction.run()" >
               <td colspan="{{columns.length}}" class="col-md-3">
                 <div class="text-center">
-                  <span class="fa" ng-class="getFooterCentralIconClass()"></span>
+                  <span class="fa" ng-class="getFooterCentralIconClass()" style="cursor: pointer"></span>
                   <span class="pull-right text-muted" ng-if="total != 0"><em>{{elements.length}} of {{total}}<span ng-if="isFiltered()"> (unfiltered)</span></em></span>
                   <span class="pull-right text-muted" ng-if="total == 0"><em>Empty</em></span>
                 </div>
