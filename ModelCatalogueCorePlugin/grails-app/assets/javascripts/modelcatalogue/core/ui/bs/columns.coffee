@@ -33,8 +33,8 @@ angular.module('mc.core.ui.bs.columns', ['mc.util.names']).config ['columnsProvi
 
   columnsProvider.registerColumns 'org.modelcatalogue.core.DataElement', [
     { header: 'Classifications',  value: getClassificationsForDataElement,  classes: 'col-md-2'}
-    { header: "Model Catalogue ID", value: "modelCatalogueId", classes: "col-md-3", show: true, href: 'modelCatalogueId'}
     { header: "Name", value: "name", classes: "col-md-3", show: true, href: 'href()', sort: {property: 'name', type: 'alpha'} }
+    { header: 'Data Type',          value: 'valueDomain.dataType.name',    classes: 'col-md-3', href: 'valueDomain.dataType.href()',       show: 'valueDomain.show()'}
     { header: "Description", value: "description" , classes: "col-md-4"}
   ]
 
