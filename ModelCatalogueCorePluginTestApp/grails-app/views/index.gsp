@@ -147,10 +147,10 @@
                     </li>
 
                 </ul>
-                <form show-if-logged-in style="padding:0px 15px 0px 5px !important;width:150px !important;margin-bottom: 0px !important;" class="navbar-form navbar-right hidden-xs" ng-controller="defaultStates.userCtrl">
+                <form show-if-logged-in style="padding:0px 10px 0px 5px !important;width:150px !important;margin-bottom: 0px !important;" class="navbar-form navbar-right hidden-xs" ng-controller="defaultStates.userCtrl">
                     <button style="float:left;" show-if-logged-in ng-click="logout()" class="btn btn-danger"  type="submit"><i class="glyphicon glyphicon-log-out"></i></button>
-                    <p  show-if-logged-in style="font-size: 12px !important;padding-left: 45px !important;margin-bottom: 0px !important;"> Logged in as </p>
-                    <p  show-if-logged-in style="font-size: 12px !important;padding-left: 45px !important; word-wrap: break-word;width: 150px;"><a style="text-decoration:none">  {{getCurrentUser().username}} </a></p>
+                    <p  show-if-logged-in style="font-size: 11px !important;padding-left: 45px !important;margin-bottom: 0px !important;"> You are logged in as <a style="text-decoration:none">  {{getCurrentUser().username}} </a></p>
+                    %{--<p  show-if-logged-in style="font-size: 12px !important;padding-left: 45px !important; word-wrap: break-word;width: 150px;"></p>--}%
                 </form>
                 <form hide-if-logged-in class="navbar-form navbar-right hidden-xs" ng-controller="defaultStates.userCtrl">
                     <button hide-if-logged-in ng-click="login()"  class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-log-in"></i></button>
@@ -168,7 +168,7 @@
 
     <div class="container-fluid container-main">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12" style="margin-top: 5px;">
                 <g:if test="${Environment.current in [Environment.DEVELOPMENT, Environment.TEST, Environment.CUSTOM]}">
                     <div id="jserrors"></div>
                 </g:if>
