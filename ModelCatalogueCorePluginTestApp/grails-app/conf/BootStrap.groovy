@@ -90,6 +90,10 @@ class BootStrap {
         }
 
         createRequestmapIfMissing('/asset/download/*',                      'IS_AUTHENTICATED_FULLY',        org.springframework.http.HttpMethod.GET)
+		//Enable ROLE_USER (ReadOnly Users) to add to favourites
+		createRequestmapIfMissing('/api/modelCatalogue/core/user/*/outgoing/favourite', 'ROLE_USER',         org.springframework.http.HttpMethod.POST)
+		//Enable ROLE_USER (ReadOnly Users) to remove from favourites
+		createRequestmapIfMissing('/api/modelCatalogue/core/user/*/outgoing/favourite', 'ROLE_USER',         org.springframework.http.HttpMethod.DELETE)
         createRequestmapIfMissing('/oauth/*/**',                            'IS_AUTHENTICATED_ANONYMOUSLY')
         createRequestmapIfMissing('/user/current',                          'IS_AUTHENTICATED_ANONYMOUSLY',  org.springframework.http.HttpMethod.GET)
         createRequestmapIfMissing('/catalogue/upload',                      'ROLE_METADATA_CURATOR',         org.springframework.http.HttpMethod.POST)
