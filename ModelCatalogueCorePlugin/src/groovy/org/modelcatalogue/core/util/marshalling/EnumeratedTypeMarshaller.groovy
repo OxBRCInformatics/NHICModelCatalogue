@@ -13,13 +13,15 @@ class EnumeratedTypeMarshaller extends CatalogueElementMarshaller {
 
     protected Map<String, Object> prepareJsonMap(element) {
         if (!element) return [:]
-		//Sort the enum values
-		def enumValues = element.enumAsString.split(/\|/)
-		element.enumAsString = enumValues.sort().join("|")
+		//Sort the enum  on transient filed enumerations
+		def sortedEnumerations = null
+		if(element?.enumerations) {
+			sortedEnumerations = element.enumerations.sort()
+		}
 
         def ret = super.prepareJsonMap(element)
         ret.putAll valueDomains: [count: element.relatedValueDomains?.size() ?: 0, itemType: ValueDomain.name, link: "/${GrailsNameUtils.getPropertyName(element.getClass())}/$element.id/valueDomain"]
-        ret.putAll enumerations: OrderedMap.toJsonMap(element.enumerations)
+        ret.putAll enumerations: OrderedMap.toJsonMap(sortedEnumerations)
         ret
     }
 
