@@ -9,8 +9,8 @@ angular.module('mc.core.ui.bs.navigationActions', ['mc.util.ui.actions', 'mc.uti
     'measurementUnit'
     'asset'
     'relationshipType'
-    'csvTransformation'
-    'batch'
+#    'csvTransformation'
+#    'batch'
   ]
 
   actionsProvider.registerActionInRole 'navbar-catalogue-elements', actionsProvider.ROLE_NAVIGATION, ['security', (security) ->
