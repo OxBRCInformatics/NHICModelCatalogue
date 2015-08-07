@@ -123,6 +123,7 @@ class RegisterController extends grails.plugin.springsecurity.ui.RegisterControl
 
 		def msg
 		command.username = user.username
+		command.checkOldPassword = true
 		command.validate()
 		if (command.hasErrors()) {
 			command.errors?.allErrors?.each{
@@ -223,6 +224,7 @@ class RegisterController extends grails.plugin.springsecurity.ui.RegisterControl
 		}
 
 		command.username = registrationCode.username
+		command.checkOldPassword = false
 		command.validate()
 		if (command.hasErrors()) {
 
@@ -334,14 +336,16 @@ class ResetPasswordCommand {
  	String oldPassword
 	String password
 	String password2
+	Boolean checkOldPassword
 	def springSecurityService
 	def saltSource
 	def passwordEncoder
 
 	static constraints = {
+		checkOldPassword nullable: true
 		username nullable: true
- 		oldPassword nullable:false, blank:false, validator: { value, command ->
-			if (value) {
+ 		oldPassword nullable:true, blank:true, validator: { value, command ->
+			if (value && command.checkOldPassword) {
 				def user = command.springSecurityService.getCurrentUser()
 				String salt = command.saltSource instanceof NullSaltSource ? null : user.username
 				if (!command.passwordEncoder.isPasswordValid(user.password, value, salt)) {
