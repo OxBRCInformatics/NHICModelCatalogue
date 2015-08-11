@@ -39,6 +39,11 @@ angular.module('mc.core.ui.states.defaultStates', ['ui.router', 'mc.util.ui'])
     $scope.validate = ->
       messages.prompt('', '', {type: 'validate-value-by-domain'})
 
+    console.log security
+
+    if security.allowRegistration
+      $scope.registrationUrl = "#{security.contextPath}/register/"
+
     $scope.create = (what) ->
       dialogType = "create-#{what}"
       if not messages.hasPromptFactory(dialogType)
@@ -740,7 +745,7 @@ angular.module('mc.core.ui.states.defaultStates', ['ui.router', 'mc.util.ui'])
            <button ng-click="login()" class="btn btn-large btn-primary" type="submit">Login <i class="glyphicon glyphicon-log-in"></i></button>
          </span>
          <span ng-controller="defaultStates.registerCtrl">
-            <button ng-click="register()" class="btn btn-large btn-primary" type="submit">Sign Up<i class="glyphicon glyphicon-pencil"></i></button>
+            <button ng-click="register()" class="btn btn-large btn-primary" type="submit">Sign Up <i class="glyphicon glyphicon-pencil"></i></button>
             <p style="font-size: 14px;cursor: pointer;"><a ng-click="forgotPassword()">Forgot your password?</a></p>
          </span>
       </form>

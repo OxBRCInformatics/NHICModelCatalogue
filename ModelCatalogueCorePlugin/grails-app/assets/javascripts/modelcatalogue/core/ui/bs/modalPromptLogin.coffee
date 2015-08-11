@@ -42,6 +42,8 @@ angular.module('mc.core.ui.bs.modalPromptLogin', ['mc.util.messages', 'ngCookies
             $scope.providers = security.oauthProviders
             $scope.names = names
             $scope.contextPath = security.contextPath
+            $scope.forgotPasswordLink = "#{security.contextPath}/register/forgotPassword"
+            $scope.canResetPassword = security.canResetPassword
             $scope.login = ->
               security.login($scope.user.username, $scope.user.password, $scope.user.rememberMe).then (success)->
                 if success.data.error
