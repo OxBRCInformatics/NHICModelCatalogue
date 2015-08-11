@@ -39,6 +39,11 @@ angular.module('mc.core.ui.states.defaultStates', ['ui.router', 'mc.util.ui'])
     $scope.validate = ->
       messages.prompt('', '', {type: 'validate-value-by-domain'})
 
+    console.log security
+
+    if security.allowRegistration
+      $scope.registrationUrl = "#{security.contextPath}/register/"
+
     $scope.create = (what) ->
       dialogType = "create-#{what}"
       if not messages.hasPromptFactory(dialogType)

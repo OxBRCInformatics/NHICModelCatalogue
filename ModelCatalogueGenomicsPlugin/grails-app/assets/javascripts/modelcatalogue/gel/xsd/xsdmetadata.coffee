@@ -4,59 +4,62 @@ xsd = angular.module('mc.core.xsd', ['mc.core.ui.metadataEditors'])
 
 # TODO: inline help
 xsd.config ['metadataEditorsProvider', (metadataEditorsProvider)->
-#  metadataEditorsProvider.register {
-#    title: 'XSD (Metadata)'
-#    types: [
-#      'model'
-#      '=[hierarchy]=>'
-#    ]
-#    keys: [
-#      "http://xsd.modelcatalogue.org/metadata#schemaName"
-#      "http://xsd.modelcatalogue.org/metadata#schemaVersion"
-#      "http://xsd.modelcatalogue.org/metadata#schemaVersionDescription"
-#      "http://xsd.modelcatalogue.org/section#type"
-#    ]
-#    template: 'modelcatalogue/core/ui/metadataEditors/xsdMetadata.html'
-#  }
 
-#  metadataEditorsProvider.register {
-#    title: 'XSD( Datatype Restrictions)'
-#    types: [
-#      'dataElement'
-#      'valueDomain'
-#      '=[containment]=>'
-#    ]
-#
-#    keys: [
-#           "http://xsd.modelcatalogue.org/restrictions#length"
-#           "http://xsd.modelcatalogue.org/restrictions#minLength"
-#           "http://xsd.modelcatalogue.org/restrictions#maxLength"
-#           "http://xsd.modelcatalogue.org/restrictions#maxInclusive"
-#           "http://xsd.modelcatalogue.org/restrictions#minInclusive"
-#           "http://xsd.modelcatalogue.org/restrictions#maxExclusive"
-#           "http://xsd.modelcatalogue.org/restrictions#minExclusive"
-#           "http://xsd.modelcatalogue.org/restrictions#totalDigits"
-#           "http://xsd.modelcatalogue.org/restrictions#fractionDigits"
-#           "http://xsd.modelcatalogue.org/restrictions#pattern"
-#    ]
-#    template: 'modelcatalogue/core/ui/metadataEditors/xsdItemValueDomainRestriction.html'
-#  }
-#  metadataEditorsProvider.register {
-#    title: 'Occurences(Metadata)'
-#    types: [
-#          'dataElement'
-#          'valueDomain'
-#          '=[containment]=>'
-#          'model'
-#          '=[hierarchy]=>'
-#        ]
-#
-#    keys: [
-#               "Min Occurs"
-#               "Max Occurs"
-#    ]
-#    template: 'modelcatalogue/core/ui/metadataEditors/metadataOccurence.html'
-#  }
+  metadataEditorsProvider.register {
+    title: 'XSD-XSL(Metadata)'
+    types: [
+      'model'
+      '=[hierarchy]=>'
+    ]
+    keys: [
+      "http://xsd.modelcatalogue.org/metadata#schemaName"
+      "http://xsd.modelcatalogue.org/metadata#schemaVersion"
+      "http://xsd.modelcatalogue.org/metadata#schemaVersionDescription"
+      "http://xsd.modelcatalogue.org/section#type"
+      "http://xsl.modelcatalogue.org/tableName"
+    ]
+    template: 'modelcatalogue/core/ui/metadataEditors/xsdMetadata.html'
+  }
+
+  metadataEditorsProvider.register {
+    title: 'XSD-XSL( Datatype Restrictions)'
+    types: [
+      'dataElement'
+      'valueDomain'
+      '=[containment]=>'
+    ]
+
+    keys: [
+           "http://xsd.modelcatalogue.org/restrictions#length"
+           "http://xsd.modelcatalogue.org/restrictions#minLength"
+           "http://xsd.modelcatalogue.org/restrictions#maxLength"
+           "http://xsd.modelcatalogue.org/restrictions#maxInclusive"
+           "http://xsd.modelcatalogue.org/restrictions#minInclusive"
+           "http://xsd.modelcatalogue.org/restrictions#maxExclusive"
+           "http://xsd.modelcatalogue.org/restrictions#minExclusive"
+           "http://xsd.modelcatalogue.org/restrictions#totalDigits"
+           "http://xsd.modelcatalogue.org/restrictions#fractionDigits"
+           "http://xsd.modelcatalogue.org/restrictions#pattern"
+           "http://xsl.modelcatalogue.org/tableName"
+    ]
+    template: 'modelcatalogue/core/ui/metadataEditors/xsdItemValueDomainRestriction.html'
+  }
+  metadataEditorsProvider.register {
+    title: 'Occurences(Metadata)'
+    types: [
+          'dataElement'
+          'valueDomain'
+          '=[containment]=>'
+          'model'
+          '=[hierarchy]=>'
+        ]
+
+    keys: [
+               "Min Occurs"
+               "Max Occurs"
+    ]
+    template: 'modelcatalogue/core/ui/metadataEditors/metadataOccurence.html'
+  }
 ]
 
 xsd.run ['$templateCache', ($templateCache) ->
@@ -64,17 +67,24 @@ xsd.run ['$templateCache', ($templateCache) ->
   <div class="alert alert-warning">This XSD metadata only applies on the root model of the Xml Schema.Every GEL Schema should have included these mandatory fields</div>
   <form class="form">
       <div class="form-group">
+          <label for="xsl-table-name1" class="control-label">Table Name(XSL)</label>
+          <input maxlength="63" type="text" class="form-control" id="xsl-table-name1" ng-model="object.access('http://xsl.modelcatalogue.org/tableName')" ng-model-options="{ getterSetter: true }">
+          <p class="help-block">
+             Optional field used for database.If you don't specify the name here,it will be taken from the name of the current item.  Only if it's a section or occurrence &gt;1. Field used for XSL data model. It will be used only for sections,for items which are repeatable. Table name must be unique across the form.
+          </p>
+      </div>
+      <div class="form-group">
           <label for="schema-name" class="control-label">XML Schema Name</label>
           <input maxlength="50" type="text" class="form-control" id="schema-name" ng-model="object.access('http://xsd.modelcatalogue.org/metadata#schemaName')" ng-model-options="{ getterSetter: true }">
               <p class="help-block">
-                  XML Schema Name. Limit to maximum 50 chars. Attention! use lower case without without spaces or unaccepted chars for an xsd element name 
+                  XML Schema Name. Limit to maximum 50 chars. Attention! use lower case without without spaces or unaccepted chars for an xsd element name
               </p>
       </div>
       <div class="form-group">
           <label for="schema-version" class="control-label">Version</label>
           <input maxlength="20" type="text" class="form-control" id="schema-version" ng-model="object.access('http://xsd.modelcatalogue.org/metadata#schemaVersion')" ng-model-options="{ getterSetter: true }">
               <p class="help-block">
-                  This define the schema version.Must be a number in format X.X.X 
+                  This define the schema version.Must be a number in format X.X.X
               </p>
       </div>
       <div class="form-group">
@@ -83,18 +93,25 @@ xsd.run ['$templateCache', ($templateCache) ->
           <p class="help-block">
              A specific xsd version description with most important changes. max 4000 chars.
           </p>
-      </div> 
+      </div>
       <div class="form-group">
           <label for="section-type" class="control-label">Section type</label>
           <select id="section-type" class="form-control" ng-options="key for (key, value) in {'Sequence':'sequence', 'Choice': 'choice',}" ng-model="object.access('http://xsd.modelcatalogue.org/section#type')" ng-model-options="{ getterSetter: true }"></select>
           <p class="help-block">
-             Whether a section should be  sequence or a choice in a ComplexType.Totally optional default will be sequence. 
+             Whether a section should be  sequence or a choice in a ComplexType.Totally optional default will be sequence.
           </p>
-      </div> 
-      </form> 
+      </div>
+      </form>
     '''
  $templateCache.put 'modelcatalogue/core/ui/metadataEditors/xsdItemValueDomainRestriction.html', '''
       <form class="form">
+        <div class="form-group">
+          <label for="xsl-table-name" class="control-label">XSL table Name</label>
+          <input maxlength="63" type="text" class="form-control" id="xsl-table-name" ng-model="object.access('http://xsl.modelcatalogue.org/tableName')" ng-model-options="{ getterSetter: true }">
+          <p class="help-block">
+             Only if it's a section or occurrence &gt;1. Field used for XSL data model. It will be used only for sections,for items which are repeatable. Table name must be unique across the form.
+          </p>
+        </div>
         <div class="form-group">
           <label for="xsd-restriction-pattern" class="control-label">Pattern (Valid XML Regex)</label>
           <input maxlength="500" type="text" class="form-control" id="xsd-restriction-pattern" ng-model="object.access('http://xsd.modelcatalogue.org/restrictions#pattern')" ng-model-options="{ getterSetter: true }">
@@ -108,7 +125,7 @@ xsd.run ['$templateCache', ($templateCache) ->
         <p class="help-block">
             Specifies the exact number of characters or list items allowed. Must be equal to or greater than zero
         </p>
-      </div> 
+      </div>
       <div class="form-group">
       <label for="xsd-restriction-maxlength" class="control-label">Max Length</label>
       <input maxlength="1000" type="text" class="form-control" id="xsd-restriction-maxlength" ng-model="object.access('http://xsd.modelcatalogue.org/restrictions#maxLength')" ng-model-options="{ getterSetter: true }">
@@ -184,6 +201,6 @@ xsd.run ['$templateCache', ($templateCache) ->
                 Max occurence of the current element within the block. A number between 0 and infinite number. Must be a number otherwise deleted.
                 </p>
         </div>
-        </form> 
-    '''    
+        </form>
+    '''
 ]
