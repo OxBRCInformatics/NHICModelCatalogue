@@ -368,7 +368,7 @@ angular.module('mc.core.ui.bs.actions', ['mc.util.ui.actions']).config ['actions
 
     {
     position:   1000
-    label:      "#{$scope.element.name} Reports"
+    label:      "Reports"
     disabled:   not $scope.element?.availableReports?.length
     generator:  (action) ->
       action.createActionsFrom 'element.availableReports', generateReports($scope, $window, enhance, rest)
